@@ -1,0 +1,319 @@
+[gd_scene load_steps=12 format=3]
+
+[ext_resource type="PackedScene" path="res://scenes/player.tscn" id="1_player"]
+[ext_resource type="Script" path="res://scripts/main.gd" id="3_main"]
+[ext_resource type="Script" path="res://scripts/sound_effects.gd" id="4_sound"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_hud"]
+bg_color = Color(0.035, 0.055, 0.1, 0.92)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.22, 0.43, 0.72, 0.9)
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_time"]
+bg_color = Color(0.045, 0.075, 0.14, 0.95)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.3, 0.65, 1, 0.95)
+corner_radius_top_left = 12
+corner_radius_top_right = 12
+corner_radius_bottom_right = 12
+corner_radius_bottom_left = 12
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_health_background"]
+bg_color = Color(0.12, 0.14, 0.2, 1)
+corner_radius_top_left = 5
+corner_radius_top_right = 5
+corner_radius_bottom_right = 5
+corner_radius_bottom_left = 5
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_health_fill"]
+bg_color = Color(0.2, 0.86, 0.42, 1)
+corner_radius_top_left = 5
+corner_radius_top_right = 5
+corner_radius_bottom_right = 5
+corner_radius_bottom_left = 5
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_upgrade"]
+bg_color = Color(0.035, 0.055, 0.11, 0.98)
+border_width_left = 3
+border_width_top = 3
+border_width_right = 3
+border_width_bottom = 3
+border_color = Color(0.38, 0.72, 1, 1)
+corner_radius_top_left = 18
+corner_radius_top_right = 18
+corner_radius_bottom_right = 18
+corner_radius_bottom_left = 18
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_button_normal"]
+bg_color = Color(0.09, 0.16, 0.28, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.22, 0.42, 0.68, 1)
+corner_radius_top_left = 9
+corner_radius_top_right = 9
+corner_radius_bottom_right = 9
+corner_radius_bottom_left = 9
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_button_hover"]
+bg_color = Color(0.13, 0.3, 0.5, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.45, 0.8, 1, 1)
+corner_radius_top_left = 9
+corner_radius_top_right = 9
+corner_radius_bottom_right = 9
+corner_radius_bottom_left = 9
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_button_pressed"]
+bg_color = Color(0.18, 0.46, 0.68, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.7, 0.92, 1, 1)
+corner_radius_top_left = 9
+corner_radius_top_right = 9
+corner_radius_bottom_right = 9
+corner_radius_bottom_left = 9
+
+[node name="Main" type="Node2D"]
+script = ExtResource("3_main")
+
+[node name="Background" type="ColorRect" parent="."]
+z_index = -10
+offset_right = 960.0
+offset_bottom = 540.0
+mouse_filter = 2
+color = Color(0.025, 0.035, 0.065, 1)
+
+[node name="HudPanel" type="Panel" parent="."]
+z_index = 5
+offset_left = 16.0
+offset_top = 16.0
+offset_right = 246.0
+offset_bottom = 174.0
+mouse_filter = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_hud")
+
+[node name="TimePanel" type="Panel" parent="."]
+z_index = 5
+offset_left = 396.0
+offset_top = 14.0
+offset_right = 564.0
+offset_bottom = 72.0
+mouse_filter = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_time")
+
+[node name="Instructions" type="Label" parent="."]
+z_index = 10
+offset_left = 260.0
+offset_top = 510.0
+offset_right = 700.0
+offset_bottom = 534.0
+theme_override_colors/font_color = Color(0.58, 0.68, 0.82, 1)
+theme_override_font_sizes/font_size = 14
+text = "MOVE  —  WASD / ARROW KEYS"
+horizontal_alignment = 1
+
+[node name="TimeLabel" type="Label" parent="."]
+z_index = 10
+offset_left = 406.0
+offset_top = 24.0
+offset_right = 554.0
+offset_bottom = 62.0
+theme_override_colors/font_color = Color(0.95, 0.97, 1, 1)
+theme_override_colors/font_outline_color = Color(0.02, 0.04, 0.08, 1)
+theme_override_constants/outline_size = 5
+theme_override_font_sizes/font_size = 25
+text = "Time: 01:00"
+horizontal_alignment = 1
+
+[node name="HealthLabel" type="Label" parent="."]
+z_index = 10
+offset_left = 32.0
+offset_top = 30.0
+offset_right = 230.0
+offset_bottom = 58.0
+theme_override_colors/font_color = Color(0.86, 0.9, 1, 1)
+theme_override_font_sizes/font_size = 18
+text = "HP: 100 / 100"
+
+[node name="HealthBar" type="ProgressBar" parent="."]
+z_index = 10
+offset_left = 32.0
+offset_top = 64.0
+offset_right = 230.0
+offset_bottom = 84.0
+mouse_filter = 2
+value = 100.0
+show_percentage = false
+theme_override_styles/background = SubResource("StyleBoxFlat_health_background")
+theme_override_styles/fill = SubResource("StyleBoxFlat_health_fill")
+
+[node name="LevelLabel" type="Label" parent="."]
+z_index = 10
+offset_left = 32.0
+offset_top = 94.0
+offset_right = 230.0
+offset_bottom = 122.0
+theme_override_colors/font_color = Color(0.86, 0.9, 1, 1)
+theme_override_font_sizes/font_size = 18
+text = "Level: 1"
+
+[node name="ExperienceLabel" type="Label" parent="."]
+z_index = 10
+offset_left = 32.0
+offset_top = 126.0
+offset_right = 230.0
+offset_bottom = 154.0
+theme_override_colors/font_color = Color(0.86, 0.9, 1, 1)
+theme_override_font_sizes/font_size = 18
+text = "XP: 0 / 5"
+
+[node name="EndOverlay" type="ColorRect" parent="."]
+process_mode = 3
+z_index = 29
+visible = false
+offset_right = 960.0
+offset_bottom = 540.0
+mouse_filter = 0
+color = Color(0.01, 0.015, 0.035, 0.82)
+
+[node name="GameOverLabel" type="Label" parent="."]
+process_mode = 3
+z_index = 30
+visible = false
+offset_left = 230.0
+offset_top = 180.0
+offset_right = 730.0
+offset_bottom = 360.0
+theme_override_colors/font_color = Color(1, 0.25, 0.25, 1)
+theme_override_colors/font_outline_color = Color(0.15, 0.01, 0.02, 1)
+theme_override_constants/outline_size = 12
+theme_override_font_sizes/font_size = 58
+text = "GAME OVER"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="GameClearLabel" type="Label" parent="."]
+process_mode = 3
+z_index = 30
+visible = false
+offset_left = 230.0
+offset_top = 180.0
+offset_right = 730.0
+offset_bottom = 360.0
+theme_override_colors/font_color = Color(0.3, 1, 0.55, 1)
+theme_override_colors/font_outline_color = Color(0.01, 0.13, 0.06, 1)
+theme_override_constants/outline_size = 12
+theme_override_font_sizes/font_size = 58
+text = "GAME CLEAR"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="UpgradeBackdrop" type="ColorRect" parent="."]
+process_mode = 3
+z_index = 19
+visible = false
+offset_right = 960.0
+offset_bottom = 540.0
+mouse_filter = 0
+color = Color(0.01, 0.02, 0.05, 0.72)
+
+[node name="UpgradePanel" type="Panel" parent="."]
+process_mode = 3
+z_index = 20
+visible = false
+offset_left = 220.0
+offset_top = 64.0
+offset_right = 740.0
+offset_bottom = 476.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_upgrade")
+
+[node name="Title" type="Label" parent="UpgradePanel"]
+offset_left = 40.0
+offset_top = 22.0
+offset_right = 480.0
+offset_bottom = 68.0
+theme_override_colors/font_color = Color(1, 0.86, 0.28, 1)
+theme_override_colors/font_outline_color = Color(0.08, 0.06, 0.01, 1)
+theme_override_constants/outline_size = 6
+theme_override_font_sizes/font_size = 36
+text = "LEVEL UP!"
+horizontal_alignment = 1
+
+[node name="Subtitle" type="Label" parent="UpgradePanel"]
+offset_left = 40.0
+offset_top = 70.0
+offset_right = 480.0
+offset_bottom = 100.0
+theme_override_colors/font_color = Color(0.7, 0.8, 0.94, 1)
+theme_override_font_sizes/font_size = 16
+text = "強化を1つ選択"
+horizontal_alignment = 1
+
+[node name="AttackDamageButton" type="Button" parent="UpgradePanel"]
+offset_left = 56.0
+offset_top = 112.0
+offset_right = 464.0
+offset_bottom = 186.0
+theme_override_colors/font_color = Color(0.92, 0.96, 1, 1)
+theme_override_font_sizes/font_size = 18
+theme_override_styles/normal = SubResource("StyleBoxFlat_button_normal")
+theme_override_styles/hover = SubResource("StyleBoxFlat_button_hover")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_button_pressed")
+theme_override_styles/focus = SubResource("StyleBoxFlat_button_hover")
+text = "攻撃力アップ\nBullet Damage +1"
+
+[node name="AttackSpeedButton" type="Button" parent="UpgradePanel"]
+offset_left = 56.0
+offset_top = 204.0
+offset_right = 464.0
+offset_bottom = 278.0
+theme_override_colors/font_color = Color(0.92, 0.96, 1, 1)
+theme_override_font_sizes/font_size = 18
+theme_override_styles/normal = SubResource("StyleBoxFlat_button_normal")
+theme_override_styles/hover = SubResource("StyleBoxFlat_button_hover")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_button_pressed")
+theme_override_styles/focus = SubResource("StyleBoxFlat_button_hover")
+text = "攻撃速度アップ\nAttack Interval × 0.9"
+
+[node name="MovementSpeedButton" type="Button" parent="UpgradePanel"]
+offset_left = 56.0
+offset_top = 296.0
+offset_right = 464.0
+offset_bottom = 370.0
+theme_override_colors/font_color = Color(0.92, 0.96, 1, 1)
+theme_override_font_sizes/font_size = 18
+theme_override_styles/normal = SubResource("StyleBoxFlat_button_normal")
+theme_override_styles/hover = SubResource("StyleBoxFlat_button_hover")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_button_pressed")
+theme_override_styles/focus = SubResource("StyleBoxFlat_button_hover")
+text = "移動速度アップ\nMove Speed × 1.1"
+
+[node name="Player" parent="." instance=ExtResource("1_player")]
+position = Vector2(480, 270)
+
+[node name="EnemySpawnTimer" type="Timer" parent="."]
+wait_time = 1.0
+autostart = true
+
+[node name="SoundEffects" type="Node" parent="."]
+process_mode = 3
+script = ExtResource("4_sound")
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="SoundEffects"]
